@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://c30jhkwddfqja"]
+
+[ext_resource type="Script" path="res://items/gold.gd" id="1_qnx3n"]
+[ext_resource type="Texture2D" uid="uid://svl1dpanvg0i" path="res://oak_woods_v1.0/Objects/coin_gold.png" id="1_wm70o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wfosv"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7awj"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikoig"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kep1"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqe8y"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt2kb"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3ndj"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paluc"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uagq4"]
+atlas = ExtResource("1_wm70o")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bnvjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7awj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikoig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kep1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqe8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt2kb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3ndj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paluc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uagq4")
+}],
+"loop": true,
+"name": &"coin",
+"speed": 10.0
+}]
+
+[node name="Gold" type="Area2D"]
+script = ExtResource("1_qnx3n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wfosv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bnvjj")
+animation = &"coin"
+autoplay = "coin"
+frame = 3
+frame_progress = 0.26929
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

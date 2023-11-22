@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=108 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkw4e8vjhfl02" path="res://oak_woods_v1.0/character/char_blue_2.png" id="3_lg48i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
+height = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5m3x2"]
 atlas = ExtResource("2_ybagw")
@@ -218,6 +219,38 @@ region = Rect2(336, 168, 56, 56)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ubto"]
 atlas = ExtResource("1_maiwr")
 region = Rect2(392, 168, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp22l"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(0, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rger"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(56, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3wfm"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(112, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd2nw"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(168, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfmwl"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(224, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3350e"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(280, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp827"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(336, 448, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7uq3"]
+atlas = ExtResource("2_ybagw")
+region = Rect2(392, 448, 56, 56)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xndmg"]
 atlas = ExtResource("1_maiwr")
@@ -531,6 +564,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sp22l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rger")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3wfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd2nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfmwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3350e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pp827")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7uq3")
+}],
+"loop": false,
+"name": &"powerStrike",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xndmg")
 }, {
 "duration": 1.0,
@@ -620,7 +682,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"walk",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="Animation" id="Animation_bepbo"]
@@ -967,6 +1029,10 @@ _data = {
 "walk": SubResource("Animation_40ten")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i5t8l"]
+radius = 35.0
+height = 216.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8atjf")
 
@@ -976,9 +1042,10 @@ shape = SubResource("CapsuleShape2D_mtkvl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_2pm4w")
-animation = &"walk"
+animation = &"powerStrike"
 autoplay = "walk"
-frame_progress = 0.954069
+frame = 7
+frame_progress = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
@@ -993,3 +1060,12 @@ drag_horizontal_enabled = true
 libraries = {
 "": SubResource("AnimationLibrary_xnv2x")
 }
+
+[node name="PowerStrikeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerStrikeArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_i5t8l")
+
+[connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
+[connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]

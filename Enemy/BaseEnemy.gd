@@ -1,11 +1,11 @@
-class_name Skeleton
+class_name BaseEnemy
 extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var chase = false
 var speed = 100
-@onready var anim = $AnimatedSprite2D
+@export var anim = ""
 var alive = true
 var hp = 100
 
@@ -58,6 +58,6 @@ func _on_damage_body_entered(body):
 	if body.name == "Player":
 		if alive:
 			body.take_damage(40)
-			#death()
+			death()
 			
 			

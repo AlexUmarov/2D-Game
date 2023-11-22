@@ -8,7 +8,8 @@ enum {
 	BLOCK,
 	SLIDE,
 	DAMADGE,
-	DEATH
+	DEATH,
+	POWER_STRIKE
 }
 
 const SPEED = 50.0
@@ -25,9 +26,14 @@ var state = MOVE
 var isAlive = true
 var isDead = false
 var run_speed = 1
+var enemies = null
+@onready var powerStrikeArea = $PowerStrikeArea
 
 func _physics_process(delta):
+		
 	match state:
+		POWER_STRIKE:
+			power_strike_state()
 		MOVE:
 			move_state()
 		ATTACK:
@@ -45,6 +51,8 @@ func _physics_process(delta):
 		DEATH:
 			death_state()
 	
+
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -90,6 +98,8 @@ func move_state():
 		print("pressed block")
 	if Input.is_action_pressed("attack"):
 		state = ATTACK
+	if Input.is_action_just_pressed("PowerStrike"):
+		state = POWER_STRIKE
 	
 func block_state ():
 	velocity.x = 0
@@ -104,13 +114,20 @@ func attack_state() :
 	await animPlayer.animation_finished
 	state = MOVE
 		
+func power_strike_state ():
+	velocity.x = 0
+	anim.play("powerStrike")
+	if enemies != null && enemies.name.contains("Skeleton"):
+		enemies.death()
+	await anim.animation_finished
+	state = MOVE
 	
 	
 func take_damage(damage=0) :
 	if health >= damage:		
 		if isAlive && state == BLOCK:
 			if health > 20:
-				health -= (20 - damage)
+				health -= (damage - 20)
 			else:
 				health = 0
 		else:
@@ -143,3 +160,13 @@ func death_state():
 		await animPlayer.animation_finished
 		isDead = true
 		
+
+
+func _on_power_strike_area_body_entered(bodyEnemy):
+	enemies = bodyEnemy
+	print(bodyEnemy)
+
+
+#func _on_power_strike_area_body_exited(bodyEnemy):
+#	enemies[bodyEnemy.name] = null
+#	print(bodyEnemy)

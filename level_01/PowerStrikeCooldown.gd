@@ -8,5 +8,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if $"../../Player/Player" != null:
-		text = "Power Strike on cooldown: " + str($"../../Player/Player".powerStrikeTimer.time_left)
+	if $"../../player/player" != null:
+		text = "Power Strike on cooldown: " + str($"../../player/player".powerStrikeTimer.time_left)

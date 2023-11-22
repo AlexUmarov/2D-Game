@@ -1,4 +1,4 @@
-class_name Skeleton
+
 extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -13,7 +13,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	var player = $"../../player/player"
+	var player = $"../../Player/Player"
 	var direction = (player.position - self.position).normalized()
 	
 	if alive == true:

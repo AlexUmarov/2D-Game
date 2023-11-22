@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2n5pybljd460"]
+
+[ext_resource type="Script" path="res://gate_to_next_lvl.gd" id="1_6jvuu"]
+[ext_resource type="Texture2D" uid="uid://basxl01h2ob1c" path="res://oak_woods_v1.0/Objects/circle.png" id="1_8av77"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a31wo"]
+radius = 33.541
+
+[node name="GateToNextLvl" type="Node2D"]
+script = ExtResource("1_6jvuu")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a31wo")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1.7375, 1.5625)
+color = Color(0.917647, 0.0705882, 0.117647, 1)
+energy = 200.0
+range_z_min = -1023
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("1_8av77")
+texture_scale = 0.1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

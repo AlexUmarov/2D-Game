@@ -20,6 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
+@onready var hpAnimation = $AnimatedSprite2D2
 var health = 100
 var gold = 0
 var state = MOVE
@@ -156,8 +157,7 @@ func take_damage(damage=0) :
 		state = DEATH
 		
 func take_damage_state():
-	animPlayer.play("takeDamage")
-	await animPlayer.animation_finished
+	hpAnimation.play("takeDamage")
 	state = MOVE
 	
 func death_state():

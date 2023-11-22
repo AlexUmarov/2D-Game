@@ -1,11 +1,10 @@
-[gd_scene load_steps=120 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=117 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
 [ext_resource type="Texture2D" uid="uid://w6f22ivi6181" path="res://oak_woods_v1.0/character/char_blue_1.png" id="2_ybagw"]
 [ext_resource type="Texture2D" uid="uid://dkw4e8vjhfl02" path="res://oak_woods_v1.0/character/char_blue_2.png" id="3_lg48i"]
-[ext_resource type="Texture2D" uid="uid://t0gyrulu886d" path="res://oak_woods_v1.0/Objects/banana.png" id="5_q0t8n"]
-[ext_resource type="Texture2D" uid="uid://hvka8lvcjo5t" path="res://oak_woods_v1.0/Objects/brick_box.png" id="5_sjt3y"]
+[ext_resource type="Texture2D" uid="uid://be8iebyjvd8vg" path="res://oak_woods_v1.0/Objects/heart.png" id="5_lntbi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
 height = 32.0
@@ -317,30 +316,6 @@ region = Rect2(336, 112, 56, 56)
 [sub_resource type="AtlasTexture" id="AtlasTexture_cjkpc"]
 atlas = ExtResource("3_lg48i")
 region = Rect2(392, 112, 56, 56)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3rymd"]
-atlas = ExtResource("5_sjt3y")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ypj78"]
-atlas = ExtResource("5_sjt3y")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_36b6o"]
-atlas = ExtResource("5_sjt3y")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7lrdx"]
-atlas = ExtResource("5_sjt3y")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hwx0v"]
-atlas = ExtResource("5_sjt3y")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mmomq"]
-atlas = ExtResource("5_sjt3y")
-region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6wv4"]
 atlas = ExtResource("3_lg48i")
@@ -677,50 +652,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3rymd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ypj78")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_36b6o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7lrdx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hwx0v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mmomq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hwx0v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7lrdx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_36b6o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ypj78")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3rymd")
-}, {
-"duration": 1.0,
-"texture": null
-}],
-"loop": false,
-"name": &"takeDamage",
-"speed": 60.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_u6wv4")
 }, {
 "duration": 1.0,
@@ -758,33 +689,9 @@ animations = [{
 [sub_resource type="Animation" id="Animation_o5ru6"]
 resource_name = "take_damage"
 length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_3px0t"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_bepbo"]
 length = 0.3
@@ -1192,6 +1099,47 @@ _data = {
 radius = 7.99999
 height = 94.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o3jl"]
+atlas = ExtResource("5_lntbi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaiko"]
+atlas = ExtResource("5_lntbi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpo74"]
+atlas = ExtResource("5_lntbi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gurqp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o3jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaiko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpo74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaiko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o3jl")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"takeDamage",
+"speed": 30.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8atjf")
 
@@ -1203,7 +1151,6 @@ position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_2pm4w")
 animation = &"takeDamage"
 autoplay = "run"
-frame = 12
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
@@ -1229,11 +1176,12 @@ debug_color = Color(0.941176, 0.196078, 0.356863, 0.105882)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1, -21)
-scale = Vector2(1.40234, 1.29297)
-texture = ExtResource("5_q0t8n")
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -19)
+sprite_frames = SubResource("SpriteFrames_gurqp")
+animation = &"takeDamage"
+frame = 6
+frame_progress = 1.0
 
 [connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
 [connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]

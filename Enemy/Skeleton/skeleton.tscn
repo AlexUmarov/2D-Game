@@ -1,65 +1,65 @@
 [gd_scene load_steps=25 format=3 uid="uid://wog6ws124eih"]
 
-[ext_resource type="Texture2D" uid="uid://d07q6juvf4rm3" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Take Hit.png" id="1_7nx4d"]
-[ext_resource type="Script" path="res://Enemy/Skeleton/skeleton.gd" id="1_mr1mp"]
-[ext_resource type="Texture2D" uid="uid://dk4llr8462to" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Death.png" id="2_6ytd1"]
-[ext_resource type="Texture2D" uid="uid://b4fh5dlsac6uy" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Idle.png" id="3_q0haw"]
-[ext_resource type="Texture2D" uid="uid://bc75g1xhh5qhr" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Walk.png" id="4_n1gm7"]
+[ext_resource type="Script" path="res://enemy/Skeleton/skeleton.gd" id="1_m22yv"]
+[ext_resource type="Texture2D" uid="uid://d07q6juvf4rm3" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Take Hit.png" id="2_pqu5s"]
+[ext_resource type="Texture2D" uid="uid://dk4llr8462to" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Death.png" id="3_ka86o"]
+[ext_resource type="Texture2D" uid="uid://b4fh5dlsac6uy" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Idle.png" id="4_l2rsi"]
+[ext_resource type="Texture2D" uid="uid://bc75g1xhh5qhr" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Walk.png" id="5_gi4uk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdqhr"]
-atlas = ExtResource("1_7nx4d")
+atlas = ExtResource("2_pqu5s")
 region = Rect2(0, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0mqdd"]
-atlas = ExtResource("1_7nx4d")
+atlas = ExtResource("2_pqu5s")
 region = Rect2(150, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m2277"]
-atlas = ExtResource("2_6ytd1")
+atlas = ExtResource("3_ka86o")
 region = Rect2(0, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_60wdn"]
-atlas = ExtResource("2_6ytd1")
+atlas = ExtResource("3_ka86o")
 region = Rect2(150, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_po6rj"]
-atlas = ExtResource("2_6ytd1")
+atlas = ExtResource("3_ka86o")
 region = Rect2(300, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5meb"]
-atlas = ExtResource("2_6ytd1")
+atlas = ExtResource("3_ka86o")
 region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dcgrn"]
-atlas = ExtResource("3_q0haw")
+atlas = ExtResource("4_l2rsi")
 region = Rect2(0, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8p58"]
-atlas = ExtResource("3_q0haw")
+atlas = ExtResource("4_l2rsi")
 region = Rect2(150, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_888ha"]
-atlas = ExtResource("3_q0haw")
+atlas = ExtResource("4_l2rsi")
 region = Rect2(300, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ffkl5"]
-atlas = ExtResource("3_q0haw")
+atlas = ExtResource("4_l2rsi")
 region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0bc2p"]
-atlas = ExtResource("4_n1gm7")
+atlas = ExtResource("5_gi4uk")
 region = Rect2(0, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aoyv7"]
-atlas = ExtResource("4_n1gm7")
+atlas = ExtResource("5_gi4uk")
 region = Rect2(150, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hdlh0"]
-atlas = ExtResource("4_n1gm7")
+atlas = ExtResource("5_gi4uk")
 region = Rect2(300, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xp521"]
-atlas = ExtResource("4_n1gm7")
+atlas = ExtResource("5_gi4uk")
 region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ssivs"]
@@ -135,7 +135,7 @@ size = Vector2(10, 4)
 size = Vector2(24, 4)
 
 [node name="Skeleton" type="CharacterBody2D"]
-script = ExtResource("1_mr1mp")
+script = ExtResource("1_m22yv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)

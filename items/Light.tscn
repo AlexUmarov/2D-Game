@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cot5r5a8eub5i"]
+
+[ext_resource type="Texture2D" uid="uid://c2b84s5nwqfbf" path="res://oak_woods_v1.0/decorations/sign.png" id="1_8tec7"]
+
+[sub_resource type="Gradient" id="Gradient_ldg2s"]
+offsets = PackedFloat32Array(0.184669, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pkhcb"]
+gradient = SubResource("Gradient_ldg2s")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.876068, 0.200855)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8tec7")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(0, -12)
+scale = Vector2(1.8125, 1.375)
+texture = SubResource("GradientTexture2D_pkhcb")

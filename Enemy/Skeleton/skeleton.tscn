@@ -146,22 +146,26 @@ autoplay = "idel"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wdyyn")
+debug_color = Color(0.235294, 0.603922, 0.556863, 0.266667)
 
 [node name="Detector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
 shape = SubResource("CircleShape2D_ptr5t")
+debug_color = Color(1, 0, 0.133333, 0)
 
 [node name="Death" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_g1rk6")
+debug_color = Color(0, 0.6, 0.701961, 0.0941176)
 
 [node name="Damage" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
 shape = SubResource("RectangleShape2D_1sxc1")
+debug_color = Color(0.898039, 0.298039, 0.27451, 0.345098)
 
 [connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
 [connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]

@@ -12,7 +12,7 @@ enum {
 	POWER_STRIKE
 }
 
-const SPEED = 50.0
+const SPEED = 80.0
 const JUMP_VELOCITY = -250.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -26,7 +26,9 @@ var state = MOVE
 var isAlive = true
 var isDead = false
 var run_speed = 1
-var enemies = null
+var enemies = []
+var powerStrikeReady = true
+@onready var powerStrikeTimer = $Timer
 @onready var powerStrikeArea = $PowerStrikeArea
 
 func _physics_process(delta):
@@ -99,7 +101,8 @@ func move_state():
 	if Input.is_action_pressed("attack"):
 		state = ATTACK
 	if Input.is_action_just_pressed("PowerStrike"):
-		state = POWER_STRIKE
+		if powerStrikeReady == true:
+			state = POWER_STRIKE
 	
 func block_state ():
 	velocity.x = 0
@@ -116,10 +119,14 @@ func attack_state() :
 		
 func power_strike_state ():
 	velocity.x = 0
-	anim.play("powerStrike")
-	if enemies != null && enemies.name.contains("Skeleton"):
-		enemies.death()
-	await anim.animation_finished
+	animPlayer.play("powerStrike")
+	for i in enemies.size():
+		var enemy = enemies[i]
+		if enemy != null && enemy.name.contains("Skeleton"):
+			enemy.death()
+	await animPlayer.animation_finished
+	powerStrikeReady = false
+	powerStrikeTimer.start(5)
 	state = MOVE
 	
 	
@@ -149,7 +156,7 @@ func take_damage(damage=0) :
 		state = DEATH
 		
 func take_damage_state():
-	animPlayer.play("damage")
+	animPlayer.play("takeDamage")
 	await animPlayer.animation_finished
 	state = MOVE
 	
@@ -163,10 +170,19 @@ func death_state():
 
 
 func _on_power_strike_area_body_entered(bodyEnemy):
-	enemies = bodyEnemy
+	if bodyEnemy.name.contains("Skeleton"):
+		enemies.append(bodyEnemy)
 	print(bodyEnemy)
 
 
-#func _on_power_strike_area_body_exited(bodyEnemy):
-#	enemies[bodyEnemy.name] = null
-#	print(bodyEnemy)
+func _on_power_strike_area_body_exited(bodyEnemy):
+	for i in enemies.size():
+		if enemies[i].name == bodyEnemy.name:
+			enemies.remove_at(i)
+			break
+	print(bodyEnemy) 
+
+
+func _on_timer_timeout():
+	powerStrikeTimer.stop()
+	powerStrikeReady = true

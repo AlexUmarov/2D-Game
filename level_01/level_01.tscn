@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgl38xgmtsmjy"]
+[gd_scene load_steps=19 format=3 uid="uid://dgl38xgmtsmjy"]
 
 [ext_resource type="Script" path="res://level_01/level_01.gd" id="1_7akk4"]
 [ext_resource type="PackedScene" uid="uid://51gh4ncp7mxj" path="res://player/player.tscn" id="2_sfcfo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b052a5hy4xkkm" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="6_xpf8k"]
 [ext_resource type="PackedScene" uid="uid://drwdclhjopa8m" path="res://items/apple.tscn" id="7_prad8"]
 [ext_resource type="PackedScene" uid="uid://wog6ws124eih" path="res://Enemy/Skeleton/skeleton.tscn" id="7_wy2dn"]
+[ext_resource type="Script" path="res://level_01/PowerStrikeCooldown.gd" id="9_6hxdn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gi4yk"]
 texture = ExtResource("6_xpf8k")
@@ -1708,13 +1709,13 @@ position = Vector2(59, 544)
 position = Vector2(-471, 312)
 
 [node name="Skeleton2" parent="Enemy" instance=ExtResource("7_wy2dn")]
-position = Vector2(624, 545)
+position = Vector2(281, 546)
 
 [node name="Skeleton3" parent="Enemy" instance=ExtResource("7_wy2dn")]
-position = Vector2(795, 545)
+position = Vector2(308, 547)
 
 [node name="Skeleton" parent="Enemy" instance=ExtResource("7_wy2dn")]
-position = Vector2(478, 546)
+position = Vector2(255, 546)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1743,6 +1744,14 @@ offset_bottom = 113.0
 theme_override_font_sizes/font_size = 30
 text = "coin"
 script = SubResource("GDScript_vah8d")
+
+[node name="PowerStrikeCooldown" type="Label" parent="CanvasLayer"]
+offset_left = 31.0
+offset_top = 113.0
+offset_right = 71.0
+offset_bottom = 136.0
+text = "Power Strike "
+script = ExtResource("9_6hxdn")
 
 [node name="Items" type="Node2D" parent="."]
 script = SubResource("GDScript_xbcpm")

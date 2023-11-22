@@ -1,9 +1,11 @@
-[gd_scene load_steps=108 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=120 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
 [ext_resource type="Texture2D" uid="uid://w6f22ivi6181" path="res://oak_woods_v1.0/character/char_blue_1.png" id="2_ybagw"]
 [ext_resource type="Texture2D" uid="uid://dkw4e8vjhfl02" path="res://oak_woods_v1.0/character/char_blue_2.png" id="3_lg48i"]
+[ext_resource type="Texture2D" uid="uid://t0gyrulu886d" path="res://oak_woods_v1.0/Objects/banana.png" id="5_q0t8n"]
+[ext_resource type="Texture2D" uid="uid://hvka8lvcjo5t" path="res://oak_woods_v1.0/Objects/brick_box.png" id="5_sjt3y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
 height = 32.0
@@ -316,6 +318,30 @@ region = Rect2(336, 112, 56, 56)
 atlas = ExtResource("3_lg48i")
 region = Rect2(392, 112, 56, 56)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rymd"]
+atlas = ExtResource("5_sjt3y")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypj78"]
+atlas = ExtResource("5_sjt3y")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36b6o"]
+atlas = ExtResource("5_sjt3y")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lrdx"]
+atlas = ExtResource("5_sjt3y")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwx0v"]
+atlas = ExtResource("5_sjt3y")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmomq"]
+atlas = ExtResource("5_sjt3y")
+region = Rect2(160, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6wv4"]
 atlas = ExtResource("3_lg48i")
 region = Rect2(0, 0, 56, 56)
@@ -618,7 +644,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -648,6 +674,50 @@ animations = [{
 "loop": false,
 "name": &"slide",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rymd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypj78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36b6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lrdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwx0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmomq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwx0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lrdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36b6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypj78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rymd")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"takeDamage",
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -682,8 +752,39 @@ animations = [{
 }],
 "loop": false,
 "name": &"walk",
-"speed": 6.0
+"speed": 20.0
 }]
+
+[sub_resource type="Animation" id="Animation_o5ru6"]
+resource_name = "take_damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_3px0t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_bepbo"]
 length = 0.3
@@ -767,7 +868,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_yy8ti"]
-length = 0.375
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -775,10 +876,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -794,7 +895,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_cdu6v"]
-length = 0.4
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -802,7 +903,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -930,8 +1031,36 @@ tracks/1/keys = {
 "values": ["jump"]
 }
 
+[sub_resource type="Animation" id="Animation_vh5o3"]
+resource_name = "powerStrike"
+length = 1.14286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286, 0.857143, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["powerStrike"]
+}
+
 [sub_resource type="Animation" id="Animation_ksoyg"]
-length = 0.8
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -940,7 +1069,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -985,9 +1114,8 @@ tracks/1/keys = {
 "values": ["slide"]
 }
 
-[sub_resource type="Animation" id="Animation_40ten"]
-length = 0.8
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_8iua2"]
+length = 0.216667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -995,10 +1123,37 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0166667, 0.0333333, 0.05, 0.0666667, 0.0833333, 0.1, 0.116667, 0.133333, 0.15, 0.166667, 0.183333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["takeDamage"]
+}
+
+[sub_resource type="Animation" id="Animation_40ten"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1015,6 +1170,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xnv2x"]
 _data = {
+"RESET": SubResource("Animation_3px0t"),
 "atack2": SubResource("Animation_bepbo"),
 "attack": SubResource("Animation_k6jdj"),
 "attack3": SubResource("Animation_ytkon"),
@@ -1024,14 +1180,17 @@ _data = {
 "fall": SubResource("Animation_x8j1y"),
 "idle": SubResource("Animation_ulxhu"),
 "jump": SubResource("Animation_544gm"),
+"powerStrike": SubResource("Animation_vh5o3"),
 "run": SubResource("Animation_ksoyg"),
 "slide": SubResource("Animation_ljo14"),
+"takeDamage": SubResource("Animation_8iua2"),
+"take_damage": SubResource("Animation_o5ru6"),
 "walk": SubResource("Animation_40ten")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i5t8l"]
-radius = 35.0
-height = 216.0
+radius = 7.99999
+height = 94.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8atjf")
@@ -1042,10 +1201,9 @@ shape = SubResource("CapsuleShape2D_mtkvl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_2pm4w")
-animation = &"powerStrike"
-autoplay = "walk"
-frame = 7
-frame_progress = 1.0
+animation = &"takeDamage"
+autoplay = "run"
+frame = 12
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
@@ -1066,6 +1224,17 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerStrikeArea"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_i5t8l")
+debug_color = Color(0.941176, 0.196078, 0.356863, 0.105882)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -21)
+scale = Vector2(1.40234, 1.29297)
+texture = ExtResource("5_q0t8n")
 
 [connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
 [connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

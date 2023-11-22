@@ -686,10 +686,6 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="Animation" id="Animation_o5ru6"]
-resource_name = "take_damage"
-length = 0.1
-
 [sub_resource type="Animation" id="Animation_3px0t"]
 length = 0.001
 
@@ -1047,6 +1043,10 @@ tracks/1/keys = {
 "update": 1,
 "values": ["takeDamage"]
 }
+
+[sub_resource type="Animation" id="Animation_o5ru6"]
+resource_name = "take_damage"
+length = 0.1
 
 [sub_resource type="Animation" id="Animation_40ten"]
 length = 0.5

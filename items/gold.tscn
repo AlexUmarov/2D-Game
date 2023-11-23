@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c30jhkwddfqja"]
+[gd_scene load_steps=14 format=3 uid="uid://c30jhkwddfqja"]
 
 [ext_resource type="Script" path="res://items/gold.gd" id="1_qnx3n"]
 [ext_resource type="Texture2D" uid="uid://svl1dpanvg0i" path="res://oak_woods_v1.0/Objects/coin_gold.png" id="1_wm70o"]
+[ext_resource type="AudioStream" uid="uid://bx4q1bf3e4dvo" path="res://sounds/pickupCoin.wav" id="3_r6gcm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wfosv"]
 radius = 8.0
@@ -82,5 +83,8 @@ animation = &"coin"
 autoplay = "coin"
 frame = 3
 frame_progress = 0.26929
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_r6gcm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

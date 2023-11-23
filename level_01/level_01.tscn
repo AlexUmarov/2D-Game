@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dgl38xgmtsmjy"]
+[gd_scene load_steps=21 format=3 uid="uid://dgl38xgmtsmjy"]
 
 [ext_resource type="Script" path="res://level_01/level_01.gd" id="1_7akk4"]
 [ext_resource type="PackedScene" uid="uid://51gh4ncp7mxj" path="res://player/player.tscn" id="2_sfcfo"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://wog6ws124eih" path="res://Enemy/Skeleton/skeleton.tscn" id="7_wy2dn"]
 [ext_resource type="Script" path="res://level_01/PowerStrikeCooldown.gd" id="9_6hxdn"]
 [ext_resource type="PackedScene" uid="uid://c2n5pybljd460" path="res://gate_to_next_lvl.tscn" id="10_hyo8x"]
+[ext_resource type="AudioStream" uid="uid://deu0f6si8s7ow" path="res://sounds/Ambient Music.wav" id="11_8sogw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gi4yk"]
 texture = ExtResource("6_xpf8k")
@@ -1786,6 +1787,11 @@ position = Vector2(756, 552)
 
 [node name="GateToNextLvl" parent="." instance=ExtResource("10_hyo8x")]
 position = Vector2(1116, 528)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_8sogw")
+volume_db = -32.657
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/btn_back" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Items/Timer" to="Items" method="_on_timer_timeout"]

@@ -21,6 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 @onready var hpAnimation = $AnimatedSprite2D2
+@onready var powerStrikeSound = $AudioStreamPlayer2D
 var health = 100
 var gold = 0
 var state = MOVE
@@ -120,6 +121,7 @@ func attack_state() :
 		
 func power_strike_state ():
 	velocity.x = 0
+	powerStrikeSound.play()
 	animPlayer.play("powerStrike")
 	for i in enemies.size():
 		var enemy = enemies[i]

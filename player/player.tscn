@@ -1,10 +1,11 @@
-[gd_scene load_steps=117 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=118 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
 [ext_resource type="Texture2D" uid="uid://w6f22ivi6181" path="res://oak_woods_v1.0/character/char_blue_1.png" id="2_ybagw"]
 [ext_resource type="Texture2D" uid="uid://dkw4e8vjhfl02" path="res://oak_woods_v1.0/character/char_blue_2.png" id="3_lg48i"]
 [ext_resource type="Texture2D" uid="uid://be8iebyjvd8vg" path="res://oak_woods_v1.0/Objects/heart.png" id="5_lntbi"]
+[ext_resource type="AudioStream" uid="uid://da1yvpjw5h0g6" path="res://sounds/laserShoot.wav" id="6_ai2lm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
 height = 32.0
@@ -1182,6 +1183,9 @@ sprite_frames = SubResource("SpriteFrames_gurqp")
 animation = &"takeDamage"
 frame = 6
 frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ai2lm")
 
 [connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
 [connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]

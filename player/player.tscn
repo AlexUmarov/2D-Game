@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dkw4e8vjhfl02" path="res://oak_woods_v1.0/character/char_blue_2.png" id="3_lg48i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
-height = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5m3x2"]
 atlas = ExtResource("2_ybagw")
@@ -1042,8 +1041,13 @@ shape = SubResource("CapsuleShape2D_mtkvl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_2pm4w")
+<<<<<<< Updated upstream
 animation = &"atack2"
 autoplay = "walk"
+=======
+animation = &"idle"
+autoplay = "run"
+>>>>>>> Stashed changes
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)

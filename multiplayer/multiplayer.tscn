@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://eq4de2b43ae3"]
+
+[ext_resource type="PackedScene" uid="uid://cdde6pcrty5ue" path="res://multiplayer/player.tscn" id="1_w13cy"]
+
+[sub_resource type="GDScript" id="GDScript_sruet"]
+script/source = "extends Node2D
+
+var peer =ENetMultiplayerPeer.new()
+
+@export var player_scene: PackedScene
+#var player_scene = preload(\"res://Enemy/Skeleton/skeleton.tscn\")
+#@export var player_scene: Node2D
+
+func _on_host_pressed():
+	peer.create_server(1234)
+	multiplayer.multiplayer_peer = peer
+	multiplayer.peer_connected.connect(_add_player)
+	_add_player()
+	
+func _add_player(id =1):
+	var player = player_scene.instantiate()
+	print(player.position)
+	player.name = str(id)
+	call_deferred(\"add_child\", player)
+	
+
+
+func _on_join_pressed():
+	peer.create_client(\"localhost\", 1234)
+	multiplayer.multiplayer_peer = peer
+"
+
+[node name="Multiplayer" type="Node2D"]
+script = SubResource("GDScript_sruet")
+player_scene = ExtResource("1_w13cy")
+
+[node name="host" type="Button" parent="."]
+offset_left = 30.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 55.0
+text = "host"
+
+[node name="join" type="Button" parent="."]
+offset_left = 33.0
+offset_top = 72.0
+offset_right = 87.0
+offset_bottom = 103.0
+text = "join"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://multiplayer/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]

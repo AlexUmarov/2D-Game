@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdde6pcrty5ue"]
+[gd_scene load_steps=5 format=3 uid="uid://cdde6pcrty5ue"]
 
 [ext_resource type="Script" path="res://multiplayer/player.gd" id="1_0tfnv"]
-[ext_resource type="Texture2D" uid="uid://pqlpcu0yaecc" path="res://icon.svg" id="2_jv2k4"]
+
+[sub_resource type="Gradient" id="Gradient_4ynyx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gwxyd"]
+gradient = SubResource("Gradient_4ynyx")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6axlh"]
 properties/0/path = NodePath(".:position")
@@ -13,7 +17,7 @@ properties/0/watch = false
 script = ExtResource("1_0tfnv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jv2k4")
+texture = SubResource("GradientTexture2D_gwxyd")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_6axlh")

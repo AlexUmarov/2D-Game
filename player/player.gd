@@ -32,7 +32,11 @@ var enemies = []
 var powerStrikeReady = true
 @onready var powerStrikeTimer = $Timer
 @onready var powerStrikeArea = $PowerStrikeArea
+@onready var damagePoint = $DamagePoint
 
+func _ready():
+	damagePoint.visible = false
+	
 func _physics_process(delta):
 		
 	match state:
@@ -123,18 +127,19 @@ func power_strike_state ():
 	velocity.x = 0
 	powerStrikeSound.play()
 	animPlayer.play("powerStrike")
+	await animPlayer.animation_finished
 	for i in enemies.size():
 		var enemy = enemies[i]
 		if enemy != null && enemy.name.contains("Skeleton"):
-			enemy.death()
-	await animPlayer.animation_finished
+			enemy.take_damage(20)
 	powerStrikeReady = false
 	powerStrikeTimer.start(5)
 	state = MOVE
 	
 	
 func take_damage(damage=0) :
-	if health >= damage:		
+	damagePoint.show_damage(damage)
+	if health >= damage:
 		if isAlive && state == BLOCK:
 			if health > 20:
 				health -= (damage - 20)
@@ -151,7 +156,6 @@ func take_damage(damage=0) :
 		else:
 			state = DAMADGE
 	else:
-		print(damage)
 		health = 0
 		isAlive = false
 		animPlayer.play("damage")
@@ -174,7 +178,6 @@ func death_state():
 func _on_power_strike_area_body_entered(bodyEnemy):
 	if bodyEnemy.name.contains("Skeleton"):
 		enemies.append(bodyEnemy)
-	print(bodyEnemy)
 
 
 func _on_power_strike_area_body_exited(bodyEnemy):
@@ -182,9 +185,13 @@ func _on_power_strike_area_body_exited(bodyEnemy):
 		if enemies[i].name == bodyEnemy.name:
 			enemies.remove_at(i)
 			break
-	print(bodyEnemy) 
 
 
 func _on_timer_timeout():
 	powerStrikeTimer.stop()
 	powerStrikeReady = true
+
+
+func _on_attack_aria_body_entered(body):
+	if body.name.contains("Skeleton"):
+		body.take_damage(20)

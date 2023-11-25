@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=120 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkw4e8vjhfl02" path="res://oak_woods_v1.0/character/char_blue_2.png" id="3_lg48i"]
 [ext_resource type="Texture2D" uid="uid://be8iebyjvd8vg" path="res://oak_woods_v1.0/Objects/heart.png" id="5_lntbi"]
 [ext_resource type="AudioStream" uid="uid://da1yvpjw5h0g6" path="res://sounds/laserShoot.wav" id="6_ai2lm"]
+[ext_resource type="PackedScene" uid="uid://bmx6k0bfil03x" path="res://Enemy/damage/damage_point.tscn" id="6_daevd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
 height = 32.0
@@ -689,6 +690,18 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_3px0t"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackAria/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_bepbo"]
 length = 0.3
@@ -742,6 +755,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["attack"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackAria/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_ytkon"]
@@ -1141,6 +1166,9 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33q6o"]
+size = Vector2(16, 9)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8atjf")
 
@@ -1150,8 +1178,9 @@ shape = SubResource("CapsuleShape2D_mtkvl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_2pm4w")
-animation = &"takeDamage"
+animation = &"attack"
 autoplay = "run"
+frame = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
@@ -1187,6 +1216,16 @@ frame_progress = 1.0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ai2lm")
 
+[node name="DamagePoint" parent="." instance=ExtResource("6_daevd")]
+
+[node name="AttackAria" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAria"]
+position = Vector2(18, -2.5)
+shape = SubResource("RectangleShape2D_33q6o")
+disabled = true
+
 [connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
 [connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="AttackAria" to="." method="_on_attack_aria_body_entered"]

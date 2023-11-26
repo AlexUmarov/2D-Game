@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpygghqlpm7c7"]
+
+[ext_resource type="Script" path="res://multiplayer/network.gd" id="1_v7f7r"]
+
+[node name="Network" type="Node"]
+script = ExtResource("1_v7f7r")
+
+[node name="Connect" type="Button" parent="."]
+offset_left = 40.0
+offset_top = 12.0
+offset_right = 112.0
+offset_bottom = 43.0
+text = "Connect"
+
+[node name="Disconnect" type="Button" parent="."]
+offset_left = 40.0
+offset_top = 50.0
+offset_right = 147.0
+offset_bottom = 81.0
+text = "Dessconnect
+"
+
+[connection signal="pressed" from="Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="Disconnect" to="." method="_on_disconnect_pressed"]

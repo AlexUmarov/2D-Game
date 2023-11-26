@@ -6,12 +6,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var chase = false
 var speed = 100
 @onready var anim = $AnimatedSprite2D
-@onready var damagePoint = $DamagePoint
+var damagePoint = preload("res://enemy/damage/damage_point.tscn")
 var alive = true
 var hp = 100
 
-func _ready():
-	damagePoint.visible = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -67,7 +65,10 @@ func _on_damage_body_entered(body):
 
 func take_damage(damage=0) :
 	if alive == true && damage > 0:
-		damagePoint.show_damage(damage)
+		var tmpDamagePoint = damagePoint.instantiate()
+		tmpDamagePoint.position = position
+		add_child(tmpDamagePoint)
+		tmpDamagePoint.show_damage(damage)
 		if hp > damage:
 			hp -= damage
 		else:

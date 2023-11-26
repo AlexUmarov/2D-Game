@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://bmtfjmpkluu7q"]
+
+[ext_resource type="Script" path="res://enemy/wizard/wizard_bullet.gd" id="1_vah3d"]
+[ext_resource type="Texture2D" uid="uid://c77nmxadc6821" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Fire_Bullet/All_Fire_Bullet_Pixel_16x16_05.png" id="1_yw5jc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26vts"]
+atlas = ExtResource("1_yw5jc")
+region = Rect2(176, 255, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up21h"]
+atlas = ExtResource("1_yw5jc")
+region = Rect2(192, 255, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvif3"]
+atlas = ExtResource("1_yw5jc")
+region = Rect2(208, 255, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3jyn"]
+atlas = ExtResource("1_yw5jc")
+region = Rect2(224, 255, 16, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0di0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26vts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up21h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvif3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3jyn")
+}],
+"loop": true,
+"name": &"move",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4evvh"]
+
+[node name="WizardBullet" type="Area2D"]
+script = ExtResource("1_vah3d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q0di0")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4evvh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

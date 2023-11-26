@@ -183,8 +183,8 @@ animations = [{
 radius = 133.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu3iq"]
-radius = 35.0
-height = 72.0
+radius = 16.0
+height = 142.0
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_siyf3"]
 
@@ -332,8 +332,8 @@ shape = SubResource("CapsuleShape2D_x71s7")
 position = Vector2(5.96046e-07, -2)
 scale = Vector2(0.378618, 0.378618)
 sprite_frames = SubResource("SpriteFrames_g2vvw")
-animation = &"idle"
-flip_h = true
+animation = &"powerAttack"
+frame = 4
 
 [node name="ChaseDetector" type="Area2D" parent="."]
 
@@ -355,7 +355,6 @@ wait_time = 3.0
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_e358m")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/conditions/idle = false
 parameters/conditions/is_run = false
 parameters/conditions/powerAttack = false
@@ -367,6 +366,12 @@ parameters/run/blend_position = Vector2(0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_8yva2")
 }
+
+[node name="BulletPointRight" type="Marker2D" parent="."]
+position = Vector2(19, 0)
+
+[node name="BulletPointLeft" type="Marker2D" parent="."]
+position = Vector2(-19, 0)
 
 [connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
 [connection signal="body_exited" from="ChaseDetector" to="." method="_on_chase_detector_body_exited"]

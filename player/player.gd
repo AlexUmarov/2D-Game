@@ -21,8 +21,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 @onready var hpAnimation = $AnimatedSprite2D2
-@onready var powerStrikeSound = $AudioStreamPlayer2D
-var health = 100
+@onready var powerStrikeSound = $Sounds/AudioSP2DPowAttack
+@onready var attackeSound = $Sounds/AudioSP2DAttack
+
+var health = 300
 var gold = 0
 var state = MOVE
 var isAlive = true
@@ -32,10 +34,8 @@ var enemies = []
 var powerStrikeReady = true
 @onready var powerStrikeTimer = $Timer
 @onready var powerStrikeArea = $PowerStrikeArea
-@onready var damagePoint = $DamagePoint
+var damagePoint = preload("res://enemy/damage/damage_point.tscn")
 
-func _ready():
-	damagePoint.visible = false
 	
 func _physics_process(delta):
 		
@@ -58,9 +58,6 @@ func _physics_process(delta):
 			take_damage_state()
 		DEATH:
 			death_state()
-	
-
-		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -138,8 +135,11 @@ func power_strike_state ():
 	
 	
 func take_damage(damage=0) :
-	damagePoint.show_damage(damage)
 	if health >= damage:
+		var tmpDamagePoint = damagePoint.instantiate()
+		tmpDamagePoint.position = position
+		add_child(tmpDamagePoint)
+		tmpDamagePoint.show_damage(damage)
 		if isAlive && state == BLOCK:
 			if health > 20:
 				health -= (damage - 20)
@@ -161,7 +161,7 @@ func take_damage(damage=0) :
 		animPlayer.play("damage")
 		await animPlayer.animation_finished
 		state = DEATH
-		
+	
 func take_damage_state():
 	hpAnimation.play("takeDamage")
 	state = MOVE
@@ -172,13 +172,10 @@ func death_state():
 		animPlayer.play("death")
 		await animPlayer.animation_finished
 		isDead = true
-		
-
 
 func _on_power_strike_area_body_entered(bodyEnemy):
 	if bodyEnemy.name.contains("Skeleton"):
 		enemies.append(bodyEnemy)
-
 
 func _on_power_strike_area_body_exited(bodyEnemy):
 	for i in enemies.size():
@@ -186,12 +183,20 @@ func _on_power_strike_area_body_exited(bodyEnemy):
 			enemies.remove_at(i)
 			break
 
-
 func _on_timer_timeout():
 	powerStrikeTimer.stop()
 	powerStrikeReady = true
 
 
-func _on_attack_aria_body_entered(body):
-	if body.name.contains("Skeleton"):
-		body.take_damage(20)
+
+
+func _on_attack_aria_left_body_entered(target_body):
+	if $AnimatedSprite2D.flip_h == true:
+		attackeSound.play()
+		target_body.take_damage(20)
+
+
+func _on_attack_aria_right_body_entered(target_body):
+	if $AnimatedSprite2D.flip_h == false:
+		attackeSound.play()
+		target_body.take_damage(20)

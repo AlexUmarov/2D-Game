@@ -21,6 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 @onready var hpAnimation = $AnimatedSprite2D2
+@onready var collision_sword = $Area2D
 var health = 100
 var gold = 0
 var state = MOVE
@@ -115,6 +116,7 @@ func block_state ():
 func attack_state() :
 	velocity.x = 0
 	animPlayer.play("attack")
+	deal_damage(50)
 	await animPlayer.animation_finished
 	state = MOVE
 		
@@ -186,3 +188,20 @@ func _on_power_strike_area_body_exited(bodyEnemy):
 func _on_timer_timeout():
 	powerStrikeTimer.stop()
 	powerStrikeReady = true
+	
+func add_in_damage_area(enemies, bodyEnemy):
+	if bodyEnemy.name.contains("Skeleton"):
+		enemies.append(bodyEnemy)
+	
+func remove_from_damage_area(enemies, bodyEnemy):
+	for i in enemies.size():
+		if enemies[i].name == bodyEnemy.name:
+			enemies.remove_at(i)
+			break
+
+func deal_damage(dmg):
+	var enemies = collision_sword.get_overlapping_areas()
+	for enemy in enemies:
+		print(enemy.name)
+		if enemy.name.contains("Skeleton"):
+			enemy.take_damage(dmg)

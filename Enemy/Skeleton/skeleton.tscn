@@ -122,9 +122,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wdyyn"]
-radius = 9.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptr5t"]
 radius = 121.017
 
@@ -134,6 +131,10 @@ size = Vector2(10, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1sxc1"]
 size = Vector2(24, 4)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wdyyn"]
+radius = 9.0
+height = 34.0
+
 [node name="Skeleton" type="CharacterBody2D"]
 script = ExtResource("1_m22yv")
 
@@ -141,12 +142,8 @@ script = ExtResource("1_m22yv")
 position = Vector2(0, -2)
 scale = Vector2(0.64, 0.64)
 sprite_frames = SubResource("SpriteFrames_ssivs")
-animation = &"idel"
+animation = &"death"
 autoplay = "idel"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_wdyyn")
-debug_color = Color(0.235294, 0.603922, 0.556863, 0.266667)
 
 [node name="Detector" type="Area2D" parent="."]
 
@@ -166,6 +163,10 @@ debug_color = Color(0, 0.6, 0.701961, 0.0941176)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
 shape = SubResource("RectangleShape2D_1sxc1")
 debug_color = Color(0.898039, 0.298039, 0.27451, 0.345098)
+
+[node name="SkeletonHitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wdyyn")
+debug_color = Color(0.235294, 0.603922, 0.556863, 0.266667)
 
 [connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
 [connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]

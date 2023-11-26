@@ -30,22 +30,23 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-
-
+func take_damage(damage=0):
+	if hp > damage:	
+		hp -= damage
+	else:
+		death()
+		
 func _on_detector_body_entered(body):
 	if body.name == "Player":
 		chase = true
-	
-
 
 func _on_detector_body_exited(body):
 	if body.name == "Player": 
 		chase = false
 
-
-func _on_death_body_entered(body):
-	if body.name == "Player":
-		death()
+#func _on_death_body_entered(body):
+	#if body.name == "Player":
+		#death()
 	
 func death():	
 	alive = false
@@ -53,11 +54,10 @@ func death():
 	await anim.animation_finished
 	queue_free()
 
-
 func _on_damage_body_entered(body):	
 	if body.name == "Player":
 		if alive:
-			body.take_damage(40)
+			body.take_damage(0)
 			#death()
 			
 			

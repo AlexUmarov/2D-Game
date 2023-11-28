@@ -1,10 +1,8 @@
 extends CharacterBody2D
 
 
-@export var speed : float = 50.0
-@export var jump_velocity : float = -400.0
+@export var speed : float = 60.0
 @export var can_double_jump : bool = true
-var has_double_jumped : bool = false
 var health = 100
 var gold = 0
 var isAlive = true
@@ -25,16 +23,12 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else: 
-		has_double_jumped = false
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
-			velocity.y = jump_velocity
-		elif can_double_jump and not has_double_jumped:
-			velocity.y = jump_velocity
-			has_double_jumped = true
+			#velocity.y = jump_velocity
+			pass
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -45,10 +39,10 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
-	update_animation()
+	update_animation_parameters()
 	update_direction()
 
-func update_animation():
+func update_animation_parameters():
 	animation_tree.set("parameters/Move/blend_position", direction.x)
 
 func update_direction():

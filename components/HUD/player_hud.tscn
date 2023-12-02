@@ -62,11 +62,3 @@ offset_right = 71.0
 offset_bottom = 136.0
 text = "PS"
 script = ExtResource("1_dcjgf")
-
-[node name="btn_back" type="Button" parent="."]
-offset_left = 1045.0
-offset_top = 9.0
-offset_right = 1139.0
-offset_bottom = 60.0
-theme_override_font_sizes/font_size = 30
-text = "back"

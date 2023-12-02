@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://c2n5pybljd460"]
+[gd_scene load_steps=27 format=3 uid="uid://c2n5pybljd460"]
 
 [ext_resource type="Script" path="res://gate_to_next_lvl.gd" id="1_6jvuu"]
 [ext_resource type="Texture2D" uid="uid://basxl01h2ob1c" path="res://oak_woods_v1.0/Objects/circle.png" id="1_8av77"]
 [ext_resource type="Texture2D" uid="uid://c4tal6f0oio5f" path="res://Particle FX 1.0/Gravity-SpriteSheet.png" id="2_y8kcr"]
+[ext_resource type="AudioStream" uid="uid://dqk6potjtqqk8" path="res://sounds/eff/12_Player_Movement_SFX/88_Teleport_02.wav" id="4_agb6q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onanh"]
 atlas = ExtResource("2_y8kcr")
@@ -162,7 +163,7 @@ script = ExtResource("1_6jvuu")
 sprite_frames = SubResource("SpriteFrames_a0g7b")
 animation = &"work"
 autoplay = "work"
-frame_progress = 0.821069
+frame_progress = 0.231279
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -180,5 +181,7 @@ texture = ExtResource("1_8av77")
 texture_scale = 0.1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_agb6q")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

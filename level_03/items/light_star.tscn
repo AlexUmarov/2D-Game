@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://leixvj56i5yo"]
+
+[ext_resource type="Script" path="res://level_03/items/light_star.gd" id="1_iub6s"]
+
+[sub_resource type="Gradient" id="Gradient_fckes"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_raa8d"]
+gradient = SubResource("Gradient_fckes")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.893162, 0.183761)
+
+[node name="LightStar" type="Node2D"]
+script = ExtResource("1_iub6s")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_raa8d")

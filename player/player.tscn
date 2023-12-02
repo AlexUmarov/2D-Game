@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=127 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bmx6k0bfil03x" path="res://enemy/damage/damage_label.tscn" id="10_0ew2a"]
 [ext_resource type="PackedScene" uid="uid://by4x5yirhb245" path="res://components/HUD/player_hud.tscn" id="11_bhkgv"]
 [ext_resource type="AudioStream" uid="uid://mmv6dsqkk8ej" path="res://sounds/eff/12_Player_Movement_SFX/03_Step_grass_03.wav" id="12_q0epj"]
+[ext_resource type="PackedScene" uid="uid://leixvj56i5yo" path="res://level_03/items/light_star.tscn" id="13_f6230"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
 
@@ -1275,6 +1276,9 @@ stream = ExtResource("12_q0epj")
 volume_db = -20.0
 
 [node name="TimerStep" type="Timer" parent="."]
+
+[node name="LightStar" parent="." instance=ExtResource("13_f6230")]
+position = Vector2(0, -15)
 
 [connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
 [connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bux6q2cqg4r5q"
+path="res://.godot/imported/22G16_Obsidian002_AmbientLoop_OGGV_VBR060.ogg-35ff348af019617f007f75be0ec4c1fc.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/Horror_music_Obsidian_pack_by_SzajnaWorkshop v1.01/22G16_Obsidian002_AmbientLoop_OGGV_VBR060.ogg"
+dest_files=["res://.godot/imported/22G16_Obsidian002_AmbientLoop_OGGV_VBR060.ogg-35ff348af019617f007f75be0ec4c1fc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

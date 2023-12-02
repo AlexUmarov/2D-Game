@@ -1,21 +1,23 @@
 
 extends CharacterBody2D
 
+@export var player: CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var chase = false
 var speed = 100
 @onready var anim = $AnimatedSprite2D
-var damagePoint = preload("res://enemy/damage/damage_point.tscn")
+var damageLable = preload("res://enemy/damage/damage_label.tscn")
 var alive = true
 var hp = 100
 
+func _ready():
+	player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	var player = $"../../Player/Player"
 	var direction = (player.position - self.position).normalized()
 	
 	if alive == true:
@@ -59,18 +61,20 @@ func death():
 func _on_damage_body_entered(body):	
 	if body.name == "Player":
 		if alive:
-			body.take_damage(40)
+			var attack = Attack.new()
+			attack.attack_damage = 20
+			body.take_damage(attack)
 			#death()
 			
 
-func take_damage(damage=0) :
-	if alive == true && damage > 0:
-		var tmpDamagePoint = damagePoint.instantiate()
-		tmpDamagePoint.position = position
-		add_child(tmpDamagePoint)
-		tmpDamagePoint.show_damage(damage)
-		if hp > damage:
-			hp -= damage
+func take_damage(attack: Attack) :
+	if alive == true && attack.attack_damage > 0:
+		var tmpDamageLable = damageLable.instantiate()
+		tmpDamageLable.position = position
+		add_child(tmpDamageLable)
+		tmpDamageLable.show_damage(attack)
+		if hp > attack.attack_damage:
+			hp -= attack.attack_damage
 		else:
 			death()
 		

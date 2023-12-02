@@ -1,50 +1,39 @@
 extends CharacterBody2D
 
+@export var stateMachine: StateMachine
+@export var animPlayer: AnimationPlayer
+@export var anim: AnimatedSprite2D
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var wizardBullet = preload("res://enemy/wizard/wizard_bullet_blue.tscn")
+@onready var bulletPointRight =  $BulletPointRight
+@onready var bulletPointLeft =  $BulletPointLeft
+"""
 enum {
 	IDLE,
 	MOVE,
 	ATTACK,
 	WAIT,
 }
-
-var wizardBullet = preload("res://enemy/wizard/wizard_bullet_blue.tscn")
-@onready var bulletPointRight =  $BulletPointRight
-@onready var bulletPointLeft =  $BulletPointLeft
-
-var chase = false
-var attack = false
-var speed = 40
-#@onready var animTree: AnimationTree = $AnimationTree
-@onready var animPlayer: AnimationPlayer = $AnimationPlayer
+"""
+#var chase = false
+#var attack = false
+#var speed = 40
 var alive = true
-var hp = 100
-var state = IDLE
+#var state = IDLE
 var powerStrikeReady = true
 @onready var powerStrikeTimer = $Timer
-var damagePoint = preload("res://enemy/damage/damage_point.tscn")
+#var damageLabel = preload("res://enemy/damage/damage_label.tscn")
+@export var player: CharacterBody2D
 
-"""	
-func update_anim_params():
-	if velocity == Vector2.ZERO:
-		animTree["parameters/conditions/idle"] = true
-		animTree["parameters/conditions/is_run"] = false
-	else:
-		animTree["parameters/conditions/idle"] = false
-		animTree["parameters/conditions/is_run"] = true
-	if powerStrikeReady == true:
-		animTree["parameters/conditions/powerAttack"] = true
-	else:
-		animTree["parameters/conditions/powerAttack"] = false
-"""
+func _ready():
+	player = get_tree().get_first_node_in_group("Player")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#update_anim_params()
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	var player = $"../../Player/Player"
+	move_and_slide()
+	"""
 	var direction = (player.position - self.position).normalized()
 	match state:
 		IDLE:
@@ -59,8 +48,38 @@ func _process(delta):
 		$AnimatedSprite2D.flip_h = true
 	else:
 		$AnimatedSprite2D.flip_h = false
+	move_and_slide()"""
+
+func _physics_process(delta):
+	if alive == true && stateMachine && animPlayer:
+		if stateMachine.current_state.name.to_lower() == "attack" && powerStrikeReady == true:
+			powerStrikeReady = false
+			powerStrikeTimer.start(3)
+			powerAttack()
+			animPlayer.play("powerAttack")
+			await animPlayer.animation_finished
+		if stateMachine.current_state.name.to_lower() == "follow":
+			animPlayer.play("run")
+		if stateMachine.current_state.name.to_lower() == "idle":
+			animPlayer.play("run")
+		if velocity.x < 0:
+			anim.flip_h = true
+		elif velocity.x > 0:
+			anim.flip_h = false
 	move_and_slide()
 
+func powerAttack():
+	var tmpWizardBullet = wizardBullet.instantiate()
+	if $AnimatedSprite2D.flip_h == true:
+		tmpWizardBullet.position = bulletPointLeft.position
+		tmpWizardBullet.dirMove = "left"
+	else:
+		tmpWizardBullet.position = bulletPointRight.position
+		tmpWizardBullet.dirMove = "right"
+	add_child(tmpWizardBullet)
+	
+
+"""
 func idle_state():
 	if alive == true:
 		velocity.x = 0
@@ -70,11 +89,11 @@ func idle_state():
 
 
 	
-func move_state(direction):
-	if chase == true:
-		velocity.x = direction.x * speed
-		animPlayer.play("run")
-		
+#func move_state(direction):
+#	if chase == true:
+#		velocity.x = direction.x * speed
+#		animPlayer.play("run")
+
 func attack_state():
 	if attack == true && powerStrikeReady == true:
 		velocity.x = 0
@@ -123,22 +142,25 @@ func _on_attack_detector_body_exited(body):
 		chase == true
 		attack = false
 		state = MOVE
-
+"""
 
 func _on_timer_timeout():
 	powerStrikeTimer.stop()
 	powerStrikeReady = true
 
-func take_damage(damage=0) :
-	if alive == true && damage > 0:
-		var tmpDamagePoint = damagePoint.instantiate()
-		tmpDamagePoint.position = position
-		add_child(tmpDamagePoint)
-		tmpDamagePoint.show_damage(damage)
-		if hp > damage:
-			hp -= damage
-		else:
-			death()
+"""
+func take_damage(attack: Attack) :
+	pass
+	#if alive == true && attack.attack_damage > 0:
+		#var tmpDamageLabel = damageLabel.instantiate()
+		#tmpDamageLabel.position = position
+		#add_child(tmpDamageLabel)
+		#tmpDamageLabel.show_damage(attack)
+		#if hp > attack.attack_damage:
+		#	hp -= attack.attack_damage
+		#else:
+		#	death()
 
 func death():
 	queue_free()
+"""

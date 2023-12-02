@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://51gh4ncp7mxj"]
+[gd_scene load_steps=126 format=3 uid="uid://51gh4ncp7mxj"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8atjf"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_maiwr"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://be8iebyjvd8vg" path="res://oak_woods_v1.0/Objects/heart.png" id="5_lntbi"]
 [ext_resource type="AudioStream" uid="uid://da1yvpjw5h0g6" path="res://sounds/laserShoot.wav" id="6_ai2lm"]
 [ext_resource type="AudioStream" uid="uid://7pabyx85atox" path="res://sounds/hit/hit.wav" id="6_c6qfh"]
+[ext_resource type="PackedScene" uid="uid://d26c6xjyyjf5j" path="res://components/health_component.tscn" id="8_swikj"]
+[ext_resource type="PackedScene" uid="uid://d1tc3a2dxq8oy" path="res://components/hitbox_component.tscn" id="9_g37yq"]
+[ext_resource type="PackedScene" uid="uid://bmx6k0bfil03x" path="res://enemy/damage/damage_label.tscn" id="10_0ew2a"]
+[ext_resource type="PackedScene" uid="uid://by4x5yirhb245" path="res://components/HUD/player_hud.tscn" id="11_bhkgv"]
+[ext_resource type="AudioStream" uid="uid://mmv6dsqkk8ej" path="res://sounds/eff/12_Player_Movement_SFX/03_Step_grass_03.wav" id="12_q0epj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtkvl"]
 
@@ -1180,15 +1185,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33q6o"]
 size = Vector2(16, 9)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngrd2"]
+size = Vector2(20, 30)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8atjf")
+
+[node name="Player_HUD" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_bhkgv")]
+health_component = NodePath("../HealthComponent")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
 process_callback = 0
 limit_left = 0
 limit_right = 5000
-limit_bottom = 675
+limit_bottom = 645
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 
@@ -1247,8 +1258,28 @@ stream = ExtResource("6_ai2lm")
 [node name="AudioSP2DAttack" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_c6qfh")
 
+[node name="HealthComponent" parent="." instance=ExtResource("8_swikj")]
+MAX_HEALTH = 250
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "damage_label") instance=ExtResource("9_g37yq")]
+health_component = NodePath("../HealthComponent")
+damage_label = NodePath("../DamageLabel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_ngrd2")
+
+[node name="DamageLabel" parent="." instance=ExtResource("10_0ew2a")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_q0epj")
+volume_db = -20.0
+
+[node name="TimerStep" type="Timer" parent="."]
+
 [connection signal="body_entered" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_entered"]
 [connection signal="body_exited" from="PowerStrikeArea" to="." method="_on_power_strike_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="AttackAriaLeft" to="." method="_on_attack_aria_left_area_entered"]
 [connection signal="body_entered" from="AttackAriaLeft" to="." method="_on_attack_aria_left_body_entered"]
+[connection signal="area_entered" from="AttackAriaRight" to="." method="_on_attack_aria_right_area_entered"]
 [connection signal="body_entered" from="AttackAriaRight" to="." method="_on_attack_aria_right_body_entered"]

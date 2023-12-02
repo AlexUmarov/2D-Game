@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://by4x5yirhb245"]
+
+[ext_resource type="Script" path="res://components/HUD/player_hud.gd" id="1_arqlb"]
+[ext_resource type="Script" path="res://level_01/PowerStrikeCooldown.gd" id="1_dcjgf"]
+
+[sub_resource type="GDScript" id="GDScript_v4th5"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+	#if $\"../../Player/Player\" != null:
+		#text = \"HP: \" + str($\"../../Player/Player\".health)
+"
+
+[sub_resource type="GDScript" id="GDScript_vah8d"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+func _process(_delta):
+	pass
+	#if $\"../../Player/Player\" != null:
+		#text = \"coin: \" + str($\"../../Player/Player\".gold)
+"
+
+[node name="Player_HUD" type="CanvasLayer"]
+script = ExtResource("1_arqlb")
+
+[node name="HP" type="Label" parent="."]
+offset_left = 26.0
+offset_top = 14.0
+offset_right = 149.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 30
+text = "HP"
+script = SubResource("GDScript_v4th5")
+
+[node name="Gold" type="Label" parent="."]
+offset_left = 26.0
+offset_top = 62.0
+offset_right = 149.0
+offset_bottom = 113.0
+theme_override_font_sizes/font_size = 30
+text = "coin"
+script = SubResource("GDScript_vah8d")
+
+[node name="PowerStrikeCooldown" type="Label" parent="."]
+offset_left = 31.0
+offset_top = 113.0
+offset_right = 71.0
+offset_bottom = 136.0
+text = "Power Strike "
+script = ExtResource("1_dcjgf")
+
+[node name="btn_back" type="Button" parent="."]
+offset_left = 1045.0
+offset_top = 9.0
+offset_right = 1139.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 30
+text = "back"

@@ -34,8 +34,10 @@ var enemies = []
 var powerStrikeReady = true
 @onready var powerStrikeTimer = $Timer
 @onready var powerStrikeArea = $PowerStrikeArea
-var damagePoint = preload("res://enemy/damage/damage_point.tscn")
+@onready var foot_step = $AudioStreamPlayer2D
+var attack_damage = 20
 
+var damageLable = preload("res://enemy/damage/damage_label.tscn")
 	
 func _physics_process(delta):
 		
@@ -83,8 +85,16 @@ func move_state():
 		if velocity.y == 0:
 			if run_speed == 1:
 				animPlayer.play("walk")
+				if $TimerStep.time_left <=0.1:
+					foot_step.pitch_scale = randf_range(0.8, 1.3)
+					foot_step.play()
+					$TimerStep.start(0.35)
 			else:
 				animPlayer.play("run")
+				if $TimerStep.time_left <=0.1:
+					foot_step.pitch_scale = randf_range(0.8, 1.2)
+					foot_step.play()
+					$TimerStep.start(0.25)
 	elif isAlive:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0 && isAlive:
@@ -128,26 +138,28 @@ func power_strike_state ():
 	for i in enemies.size():
 		var enemy = enemies[i]
 		if enemy != null && enemy.name.contains("Skeleton"):
-			enemy.take_damage(20)
+			var attack = Attack.new()
+			attack.attack_damage = 20
+			enemy.take_damage(attack)
 	powerStrikeReady = false
 	powerStrikeTimer.start(5)
 	state = MOVE
 	
 	
-func take_damage(damage=0) :
-	if health >= damage:
-		var tmpDamagePoint = damagePoint.instantiate()
-		tmpDamagePoint.position = position
-		add_child(tmpDamagePoint)
-		tmpDamagePoint.show_damage(damage)
+func take_damage(attack: Attack) :
+	if health >= attack.attack_damage:
+		var tmpDamageLable = damageLable.instantiate()
+		tmpDamageLable.position = position
+		add_child(tmpDamageLable)
+		tmpDamageLable.show_damage(attack)
 		if isAlive && state == BLOCK:
 			if health > 20:
-				health -= (damage - 20)
+				health -= (attack.attack_damage - 20)
 			else:
 				health = 0
 		else:
 			if health > 40:
-				health -= damage
+				health -= attack.attack_damage
 			else:
 				health = 0
 		if health <= 0:
@@ -189,7 +201,7 @@ func _on_timer_timeout():
 
 
 
-
+"""
 func _on_attack_aria_left_body_entered(target_body):
 	if $AnimatedSprite2D.flip_h == true:
 		attackeSound.play()
@@ -200,3 +212,23 @@ func _on_attack_aria_right_body_entered(target_body):
 	if $AnimatedSprite2D.flip_h == false:
 		attackeSound.play()
 		target_body.take_damage(20)
+"""
+
+func _on_attack_aria_left_area_entered(area):
+	if $AnimatedSprite2D.flip_h == true:
+		if area is HitboxComponent:
+			var hitbox: HitboxComponent = area
+			var attack = Attack.new()
+			attack.attack_damage = attack_damage
+			attack.attack_position = global_position
+			hitbox.damage(attack)
+
+
+func _on_attack_aria_right_area_entered(area):
+	if $AnimatedSprite2D.flip_h == false:
+		if area is HitboxComponent:
+			var hitbox: HitboxComponent = area
+			var attack = Attack.new()
+			attack.attack_damage = attack_damage
+			attack.attack_position = global_position
+			hitbox.damage(attack)

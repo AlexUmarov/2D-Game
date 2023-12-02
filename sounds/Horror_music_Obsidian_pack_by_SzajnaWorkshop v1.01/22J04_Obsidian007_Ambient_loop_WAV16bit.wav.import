@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cmgw014d2eirn"
+path="res://.godot/imported/22J04_Obsidian007_Ambient_loop_WAV16bit.wav-239280256787d0e80399961481c774e3.sample"
+
+[deps]
+
+source_file="res://sounds/Horror_music_Obsidian_pack_by_SzajnaWorkshop v1.01/22J04_Obsidian007_Ambient_loop_WAV16bit.wav"
+dest_files=["res://.godot/imported/22J04_Obsidian007_Ambient_loop_WAV16bit.wav-239280256787d0e80399961481c774e3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

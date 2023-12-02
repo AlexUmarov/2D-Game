@@ -35,7 +35,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_r1tfe")
 }],
 "loop": true,
-"name": &"default",
+"name": &"move",
 "speed": 5.0
 }]
 
@@ -48,12 +48,13 @@ script = ExtResource("1_t4mao")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pymdp")
-frame = 2
-frame_progress = 0.0916979
+animation = &"move"
+autoplay = "move"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_2mpds")
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

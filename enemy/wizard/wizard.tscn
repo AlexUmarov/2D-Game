@@ -1,11 +1,47 @@
-[gd_scene load_steps=46 format=3 uid="uid://bimljs3xa76r8"]
+[gd_scene load_steps=49 format=3 uid="uid://bimljs3xa76r8"]
 
 [ext_resource type="Texture2D" uid="uid://byl0eotgyu4j0" path="res://oak_woods_v1.0/character/Wizard Pack/Idle.png" id="1_70gu5"]
-[ext_resource type="Script" path="res://Enemy/wizard/wizard.gd" id="1_i25oo"]
+[ext_resource type="Script" path="res://enemy/wizard/wizard.gd" id="1_percd"]
+[ext_resource type="Texture2D" uid="uid://x5e3pwvcrbcb" path="res://oak_woods_v1.0/character/Wizard Pack/Death.png" id="2_8k7c5"]
 [ext_resource type="Texture2D" uid="uid://cmri26rdirfek" path="res://oak_woods_v1.0/character/Wizard Pack/Attack1.png" id="2_84v4x"]
 [ext_resource type="Texture2D" uid="uid://bnd4hdro8q6np" path="res://oak_woods_v1.0/character/Wizard Pack/Run.png" id="4_fqf6q"]
+[ext_resource type="Script" path="res://components/StateMachine/StateMachine.gd" id="6_j74me"]
+[ext_resource type="Script" path="res://components/StateMachine/EnemyIdle.gd" id="7_h7c8q"]
+[ext_resource type="Script" path="res://components/StateMachine/EnemyFollow.gd" id="8_mqfbr"]
+[ext_resource type="Script" path="res://components/StateMachine/EnemyAttack.gd" id="8_ylf8k"]
+[ext_resource type="PackedScene" uid="uid://d26c6xjyyjf5j" path="res://components/health_component.tscn" id="9_mhpdk"]
+[ext_resource type="PackedScene" uid="uid://d1tc3a2dxq8oy" path="res://components/hitbox_component.tscn" id="10_uk537"]
+[ext_resource type="PackedScene" uid="uid://bmx6k0bfil03x" path="res://enemy/damage/damage_label.tscn" id="11_jgvpe"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x71s7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rriu7"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(0, 0, 231, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3bwu"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(231, 0, 231, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wewi8"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(462, 0, 231, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xi3o"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(693, 0, 231, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb3sh"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(924, 0, 231, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_givb0"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(1155, 0, 231, 190)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0205"]
+atlas = ExtResource("2_8k7c5")
+region = Rect2(1386, 0, 231, 190)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0jcj"]
 atlas = ExtResource("1_70gu5")
@@ -99,6 +135,32 @@ region = Rect2(1617, 0, 231, 190)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rriu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3bwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wewi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xi3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb3sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_givb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0205")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_a0jcj")
 }, {
 "duration": 1.0,
@@ -178,59 +240,6 @@ animations = [{
 "name": &"run",
 "speed": 10.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_lj26k"]
-radius = 133.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xu3iq"]
-radius = 16.0
-height = 142.0
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_siyf3"]
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_icyni"]
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tpr8h"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iwt8q"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qk2mf"]
-advance_mode = 2
-advance_condition = &"is_run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kk4qn"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ldgcx"]
-advance_mode = 2
-advance_condition = &"powerAttack"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2xm17"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7yxkr"]
-advance_mode = 2
-advance_condition = &"powerAttack"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ywchc"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"is_run"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e358m"]
-states/End/position = Vector2(701, 112)
-states/Start/position = Vector2(204, 112)
-states/idle/node = SubResource("AnimationNodeBlendSpace2D_siyf3")
-states/idle/position = Vector2(344, 112)
-states/powerAttack/node = SubResource("AnimationNodeBlendSpace2D_icyni")
-states/powerAttack/position = Vector2(454, 33)
-states/run/node = SubResource("AnimationNodeBlendSpace2D_tpr8h")
-states/run/position = Vector2(545, 112)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_iwt8q"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_qk2mf"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_kk4qn"), "idle", "powerAttack", SubResource("AnimationNodeStateMachineTransition_ldgcx"), "powerAttack", "idle", SubResource("AnimationNodeStateMachineTransition_2xm17"), "run", "powerAttack", SubResource("AnimationNodeStateMachineTransition_7yxkr"), "powerAttack", "run", SubResource("AnimationNodeStateMachineTransition_ywchc")]
 
 [sub_resource type="Animation" id="Animation_dsrqq"]
 length = 0.6
@@ -322,8 +331,15 @@ _data = {
 "run": SubResource("Animation_yxcfp")
 }
 
-[node name="Wizard" type="CharacterBody2D"]
-script = ExtResource("1_i25oo")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2wf0"]
+size = Vector2(20, 30)
+
+[node name="Wizard" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine", "animPlayer", "anim", "player")]
+script = ExtResource("1_percd")
+stateMachine = NodePath("StateMachine")
+animPlayer = NodePath("AnimationPlayer")
+anim = NodePath("AnimatedSprite2D")
+player = NodePath(".")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_x71s7")
@@ -333,34 +349,10 @@ position = Vector2(5.96046e-07, -2)
 scale = Vector2(0.378618, 0.378618)
 sprite_frames = SubResource("SpriteFrames_g2vvw")
 animation = &"powerAttack"
-frame = 4
-
-[node name="ChaseDetector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseDetector"]
-modulate = Color(0.137255, 0.262745, 1, 1)
-shape = SubResource("CircleShape2D_lj26k")
-debug_color = Color(0.901961, 0.290196, 0.27451, 0)
-
-[node name="AttackDetector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_xu3iq")
-debug_color = Color(0.984314, 0, 0.364706, 0)
+frame = 7
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_e358m")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/idle = false
-parameters/conditions/is_run = false
-parameters/conditions/powerAttack = false
-parameters/idle/blend_position = Vector2(0, 0)
-parameters/powerAttack/blend_position = Vector2(0, 0)
-parameters/run/blend_position = Vector2(0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -373,8 +365,39 @@ position = Vector2(19, 0)
 [node name="BulletPointLeft" type="Marker2D" parent="."]
 position = Vector2(-19, 0)
 
-[connection signal="body_entered" from="ChaseDetector" to="." method="_on_chase_detector_body_entered"]
-[connection signal="body_exited" from="ChaseDetector" to="." method="_on_chase_detector_body_exited"]
-[connection signal="body_entered" from="AttackDetector" to="." method="_on_attack_detector_body_entered"]
-[connection signal="body_exited" from="AttackDetector" to="." method="_on_attack_detector_body_exited"]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "stateLabel")]
+script = ExtResource("6_j74me")
+initial_state = NodePath("Idle")
+stateLabel = NodePath("../StateLabel")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_h7c8q")
+enemy = NodePath("../..")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_ylf8k")
+enemy = NodePath("../..")
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_mqfbr")
+enemy = NodePath("../..")
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_mhpdk")]
+MAX_HEALTH = 60
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "damage_label") instance=ExtResource("10_uk537")]
+health_component = NodePath("../HealthComponent")
+damage_label = NodePath("../DamageLabel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_e2wf0")
+
+[node name="DamageLabel" parent="." instance=ExtResource("11_jgvpe")]
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -54.0
+offset_right = 20.0
+offset_bottom = -31.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

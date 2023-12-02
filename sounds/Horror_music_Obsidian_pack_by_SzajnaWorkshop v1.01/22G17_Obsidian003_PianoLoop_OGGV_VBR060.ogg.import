@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://esuub8ku0l4l"
+path="res://.godot/imported/22G17_Obsidian003_PianoLoop_OGGV_VBR060.ogg-de87bae165ac3109003185f4124babca.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/Horror_music_Obsidian_pack_by_SzajnaWorkshop v1.01/22G17_Obsidian003_PianoLoop_OGGV_VBR060.ogg"
+dest_files=["res://.godot/imported/22G17_Obsidian003_PianoLoop_OGGV_VBR060.ogg-de87bae165ac3109003185f4124babca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

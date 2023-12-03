@@ -11562,4 +11562,4 @@ position = Vector2(1762, 485)
 position = Vector2(1762, 485)
 
 [node name="MarkerPlayerPosition" type="Marker2D" parent="."]
-position = Vector2(96, 464)
+position = Vector2(71, 511)

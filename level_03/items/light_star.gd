@@ -17,11 +17,11 @@ func _process(delta):
 		wander_time -= delta
 	else:
 		randomize_wander()
-	light.energy = wander_time
+	#light.energy = wander_time
 	#position = move_direction * move_speed
 
 
 func randomize_wander():
 	move_direction = Vector2(randf_range(-.1, .1), 0).normalized()
-	wander_time = randf_range(.5, .7)
+	wander_time = randf_range(.3, .5)
 	#energy = randf_range(.1, .3)

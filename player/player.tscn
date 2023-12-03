@@ -1192,8 +1192,9 @@ size = Vector2(20, 30)
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8atjf")
 
-[node name="Player_HUD" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_bhkgv")]
+[node name="Player_HUD" parent="." node_paths=PackedStringArray("health_component", "player") instance=ExtResource("11_bhkgv")]
 health_component = NodePath("../HealthComponent")
+player = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)

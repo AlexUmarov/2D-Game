@@ -40,7 +40,6 @@ var attack_damage = 20
 var damageLable = preload("res://enemy/damage/damage_label.tscn")
 	
 func _physics_process(delta):
-		
 	match state:
 		POWER_STRIKE:
 			power_strike_state()

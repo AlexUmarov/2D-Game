@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://nhegi3xe2exv"]
+
+[ext_resource type="Texture2D" uid="uid://djceei7qot2lg" path="res://Elementals_fire_knight_FREE_v1.1/spritesheets/fire_FREE_SpriteSheet_288x128.png" id="1_uv62y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf8b3"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(0, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55n1g"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(288, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhmx2"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(576, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24opa"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(864, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjacp"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(1152, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7nta"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(1440, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk4x7"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(1728, 0, 288, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2or5i"]
+atlas = ExtResource("1_uv62y")
+region = Rect2(2016, 0, 288, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xenep"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf8b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55n1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhmx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24opa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjacp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7nta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk4x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2or5i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="pride" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -38)
+sprite_frames = SubResource("SpriteFrames_xenep")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0252542

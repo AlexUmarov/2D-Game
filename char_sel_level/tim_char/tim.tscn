@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4otyatha1udu"]
+
+[ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="1_xsgvr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftcng"]
+atlas = ExtResource("1_xsgvr")
+region = Rect2(0, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuk8s"]
+atlas = ExtResource("1_xsgvr")
+region = Rect2(56, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmn8n"]
+atlas = ExtResource("1_xsgvr")
+region = Rect2(112, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg0xn"]
+atlas = ExtResource("1_xsgvr")
+region = Rect2(168, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfd7k"]
+atlas = ExtResource("1_xsgvr")
+region = Rect2(224, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vagyx"]
+atlas = ExtResource("1_xsgvr")
+region = Rect2(280, 0, 56, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_suy85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftcng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuk8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmn8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg0xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfd7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vagyx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="tim" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -12)
+sprite_frames = SubResource("SpriteFrames_suy85")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.093245
+flip_h = true

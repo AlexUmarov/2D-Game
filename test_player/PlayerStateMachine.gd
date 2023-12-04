@@ -3,13 +3,14 @@ class_name PlayerStateMachine
 
 @export var states : Array[State]
 @export var current_state : State
-@export var character : CharacterBody2D
+@export var character : Test_player
 @export var animation_tree : AnimationTree
 
 func _ready():
 	for child in get_children():
 		if (child is State):
 			states.append(child)
+			child.animation_tree = animation_tree
 			child.character = character 
 			child.playback = animation_tree["parameters/playback"]
 			

@@ -1,8 +1,14 @@
 extends CharacterBody2D
+class_name Test_player
 
 
 @export var speed : float = 60.0
+@export var run_speed : float = 3.0
 @export var can_double_jump : bool = true
+@export var jump_velocity : float = -300.0
+@export var double_jump_velocity : float = -300.0
+var speed_multiplier : float = 1.0
+var has_double_jumped : bool = false
 var health = 100
 var gold = 0
 var isAlive = true
@@ -33,10 +39,15 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = Input.get_vector("left", "right", "up", "down")
-	if direction.x != 0 && state_machine.check_if_can_move():
-		velocity.x = direction.x * speed
+	if Input.is_action_pressed("run"):
+		speed_multiplier = run_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		speed_multiplier = 1.0
+
+	if direction.x != 0 && state_machine.check_if_can_move():
+		velocity.x = direction.x * speed * speed_multiplier
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
 
 	move_and_slide()
 	update_animation_parameters()

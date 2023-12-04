@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://clyj6is2rgy6u"]
+
+[ext_resource type="Script" path="res://items/chest.gd" id="1_k7gh5"]
+[ext_resource type="Texture2D" uid="uid://bbvd0t0ca5vgj" path="res://oak_woods_v1.0/Objects/treasure_chest.png" id="1_tj5w1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxqg3"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8hoy"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3n3r"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kow6"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo40m"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4iss"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbi3p"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuki6"]
+atlas = ExtResource("1_tj5w1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjnq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxqg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8hoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3n3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kow6")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fo40m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4iss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbi3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuki6")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60kxp"]
+size = Vector2(26, 15)
+
+[node name="Chest" type="Area2D"]
+script = ExtResource("1_k7gh5")
+
+[node name="AnimatedSpriteChest" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_yjnq8")
+animation = &"open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2.5)
+shape = SubResource("RectangleShape2D_60kxp")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

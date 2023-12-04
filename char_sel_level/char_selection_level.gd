@@ -15,10 +15,6 @@ func _ready():
 		char.add_child(tmp_light)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 func character_selected(name):
 	current_character_selecterd = name
 	$Label.text = current_character_selecterd
@@ -40,3 +36,19 @@ func _on_button_pressed():
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://menu.tscn")
+
+
+func _on_play_mouse_entered():
+	$play/LightStar.visible = true
+
+
+func _on_play_mouse_exited():
+	$play/LightStar.visible = false
+
+
+func _on_back_mouse_entered():
+	$back/LightStar.visible = true
+
+
+func _on_back_mouse_exited():
+	$back/LightStar.visible = false

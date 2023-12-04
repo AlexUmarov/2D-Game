@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs5s8q27g8m22"]
+
+[ext_resource type="Script" path="res://char_sel_level/BringhtSide/bright_sel_area.gd" id="1_vkpkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ueheo"]
+size = Vector2(30, 40)
+
+[node name="bright_sel_Area" type="Area2D"]
+script = ExtResource("1_vkpkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ueheo")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

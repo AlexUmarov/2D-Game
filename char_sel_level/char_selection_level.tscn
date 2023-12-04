@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn6qp3sh4dmfs"]
+[gd_scene load_steps=15 format=3 uid="uid://bn6qp3sh4dmfs"]
 
 [ext_resource type="Script" path="res://char_sel_level/char_selection_level.gd" id="1_820j4"]
 [ext_resource type="PackedScene" uid="uid://nhegi3xe2exv" path="res://char_sel_level/pride_char/pride.tscn" id="2_6v53e"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cxlpvhaun8l8u" path="res://DarkForest1.2/decorative_obj.png" id="4_n4xrr"]
 [ext_resource type="Texture2D" uid="uid://dedlalxyo3u68" path="res://DarkForest1.2/env_mon.png" id="5_k2u3u"]
 [ext_resource type="PackedScene" uid="uid://tn2dihlxsucy" path="res://level_03/items/fire.tscn" id="9_grwgt"]
+[ext_resource type="AudioStream" uid="uid://esuub8ku0l4l" path="res://sounds/Horror_music_Obsidian_pack_by_SzajnaWorkshop v1.01/22G17_Obsidian003_PianoLoop_OGGV_VBR060.ogg" id="9_opnek"]
+[ext_resource type="PackedScene" uid="uid://leixvj56i5yo" path="res://level_03/items/light_star.tscn" id="10_rm8ue"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m21au"]
 texture = ExtResource("3_jpgrm")
@@ -2326,9 +2328,6 @@ sources/4 = SubResource("TileSetAtlasSource_q1o77")
 [node name="char_selection_level" type="Node2D"]
 script = ExtResource("1_820j4")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0.172549, 0.376471, 1)
-
 [node name="MainBackground" type="Sprite2D" parent="."]
 position = Vector2(-1.43051e-06, 13)
 scale = Vector2(0.470703, 0.510417)
@@ -2336,6 +2335,9 @@ texture = ExtResource("2_xuic3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0.172549, 0.376471, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_0mtf0")
@@ -2375,6 +2377,14 @@ theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Fire" parent="." instance=ExtResource("9_grwgt")]
+position = Vector2(1, 48)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_opnek")
+volume_db = -20.0
+autoplay = true
+
 [node name="play" type="Button" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
@@ -2387,8 +2397,9 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 30
 text = "PLAY"
 
-[node name="Fire" parent="." instance=ExtResource("9_grwgt")]
-position = Vector2(1, 48)
+[node name="LightStar" parent="play" instance=ExtResource("10_rm8ue")]
+visible = false
+position = Vector2(40, 24)
 
 [node name="back" type="Button" parent="."]
 offset_left = 68.0
@@ -2397,5 +2408,13 @@ offset_right = 113.0
 offset_bottom = -79.0
 text = "back"
 
+[node name="LightStar" parent="back" instance=ExtResource("10_rm8ue")]
+visible = false
+position = Vector2(23, 17)
+
+[connection signal="mouse_entered" from="play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="play" to="." method="_on_play_mouse_exited"]
 [connection signal="pressed" from="play" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="back" to="." method="_on_back_mouse_entered"]
+[connection signal="mouse_exited" from="back" to="." method="_on_back_mouse_exited"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

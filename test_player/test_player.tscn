@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cu7epuwa1eg5i"]
+[gd_scene load_steps=45 format=3 uid="uid://cu7epuwa1eg5i"]
 
 [ext_resource type="Script" path="res://test_player/test_player.gd" id="1_26gh7"]
 [ext_resource type="Texture2D" uid="uid://drrcpxnvx8a7l" path="res://oak_woods_v1.0/character/char_blue.png" id="2_3hete"]
@@ -402,13 +402,23 @@ animation = &"walk"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_use62"]
 animation = &"walk"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t2an4"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cho1l"]
+animation = &"run"
+
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ipcs2"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_taner")
 blend_point_0/pos = 0.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_8tpjs")
-blend_point_1/pos = 1.0
+blend_point_1/pos = 0.5
 blend_point_2/node = SubResource("AnimationNodeAnimation_use62")
-blend_point_2/pos = -1.0
+blend_point_2/pos = -0.5
+blend_point_3/node = SubResource("AnimationNodeAnimation_t2an4")
+blend_point_3/pos = -1.0
+blend_point_4/node = SubResource("AnimationNodeAnimation_cho1l")
+blend_point_4/pos = 1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hyki8"]
@@ -476,11 +486,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_y3vnq")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_fall_end = false
-parameters/Move/blend_position = -0.000512004
+parameters/Move/blend_position = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(9, -28)
-texture = ExtResource("2_3hete")
+texture = ExtResource("3_nv083")
 hframes = 8
 vframes = 7
 

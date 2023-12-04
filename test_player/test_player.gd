@@ -48,13 +48,19 @@ func _physics_process(delta):
 		velocity.x = direction.x * speed * speed_multiplier
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
+	print(animation_tree["parameters/Move/blend_position"])
 
 	move_and_slide()
 	update_animation_parameters()
 	update_direction()
 
 func update_animation_parameters():
-	animation_tree.set("parameters/Move/blend_position", direction.x)
+	if (direction.x == 0):
+		animation_tree.set("parameters/Move/blend_position", 0)
+	elif (speed_multiplier > 1):
+		animation_tree.set("parameters/Move/blend_position", 1)
+	else:
+		animation_tree.set("parameters/Move/blend_position", 0.5)
 
 func update_direction():
 	if direction.x < 0:

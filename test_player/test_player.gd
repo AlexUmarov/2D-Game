@@ -43,13 +43,10 @@ func _physics_process(delta):
 		speed_multiplier = run_speed
 	else:
 		speed_multiplier = 1.0
-
 	if direction.x != 0 && state_machine.check_if_can_move():
 		velocity.x = direction.x * speed * speed_multiplier
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed * speed_multiplier)
-	print(animation_tree["parameters/Move/blend_position"])
-
 	move_and_slide()
 	update_animation_parameters()
 	update_direction()

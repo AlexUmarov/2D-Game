@@ -500,9 +500,9 @@ current_state = NodePath("Ground")
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Ground" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("air_state")]
+[node name="Ground" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("jump_state")]
 script = ExtResource("6_pmvel")
-air_state = NodePath("../Jump")
+jump_state = NodePath("../Jump")
 
 [node name="Air" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("landing_state", "ground_state", "jump_state")]
 script = ExtResource("7_u7f4k")

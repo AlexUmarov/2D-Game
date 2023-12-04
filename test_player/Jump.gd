@@ -9,7 +9,7 @@ func state_process(delta):
 		animation_tree["parameters/conditions/is_fall_end"] = false
 		next_state = air_state
 	elif (character.is_on_floor()):
-		#animation_tree["parameters/conditions/is_fall_end"] = true
+		animation_tree["parameters/conditions/is_fall_end"] = true
 		next_state = air_state
 
 func on_exit():

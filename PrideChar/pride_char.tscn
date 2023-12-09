@@ -622,7 +622,7 @@ graph_offset = Vector2(-14, 100)
 radius = 11.0
 height = 44.0
 
-[node name="PrideChar" type="CharacterBody2D" groups=["PrideChar"]]
+[node name="PrideChar" type="CharacterBody2D" groups=["Player", "PrideChar"]]
 script = ExtResource("1_ljo2m")
 
 [node name="Player_HUD" parent="." node_paths=PackedStringArray("health_component", "player") instance=ExtResource("2_r8qon")]

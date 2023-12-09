@@ -8,13 +8,18 @@ var speed = 100
 @onready var anim = $AnimatedSprite2D
 var alive = true
 var hp = 100
+var player: CharacterBody2D
+
+func _ready():
+	player = get_tree().get_first_node_in_group("Player")
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	var player = $"../../Player/Player"
-	var direction = (player.position - self.position).normalized()
+	var direction
+	if player:
+		direction = (player.position - self.position).normalized()
 	
 	if alive == true:
 		if chase == true:
@@ -23,7 +28,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = 0
 			anim.play("idle")
-		if direction.x < 0:
+		if direction && direction.x < 0:
 			$AnimatedSprite2D.flip_h = true
 		else:
 			$AnimatedSprite2D.flip_h = false

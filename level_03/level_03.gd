@@ -14,7 +14,7 @@ func get_player_character():
 		"pride":
 			player = load("res://PrideChar/pride_char.tscn")
 		"tim":
-			player = load("res://player/player.tscn")
+			player = load("res://test_player/test_player.tscn")
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

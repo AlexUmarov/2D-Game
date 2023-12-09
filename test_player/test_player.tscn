@@ -494,7 +494,7 @@ texture = ExtResource("3_nv083")
 hframes = 8
 vframes = 7
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree")]
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree") groups=["Player"]]
 script = ExtResource("5_2im20")
 current_state = NodePath("Ground")
 character = NodePath("..")

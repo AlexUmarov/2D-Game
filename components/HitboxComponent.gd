@@ -8,5 +8,5 @@ func damage(attack: Attack):
 	print(attack)
 	if health_component:
 		health_component.damage(attack)
-		if damage_label:
+		if damage_label != null:
 			damage_label.show_damage(attack)

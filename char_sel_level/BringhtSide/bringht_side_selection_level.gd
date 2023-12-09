@@ -22,7 +22,7 @@ func character_selected(name):
 func _on_play_pressed():
 	if current_character_selecterd:
 		Global.set_player_character(current_character_selecterd)
-		get_tree().change_scene_to_file("res://level_03/level_03.tscn")
+		get_tree().change_scene_to_file("res://level_01/level_01.tscn")
 
 
 func _on_back_pressed():

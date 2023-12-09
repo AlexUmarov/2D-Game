@@ -7,12 +7,12 @@ var current_character_selecterd
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for char in $Characters.get_children():
-		char.add_child(selArea.instantiate())
+	for ch in $Characters.get_children():
+		ch.add_child(selArea.instantiate())
 		var tmp_light = light.instantiate()
 		#tmp_light.position = char.position
 		tmp_light.visible = false
-		char.add_child(tmp_light)
+		ch.add_child(tmp_light)
 
 
 func character_selected(name):

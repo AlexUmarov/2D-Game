@@ -587,5 +587,13 @@ offset_bottom = -189.0
 theme_override_font_sizes/font_size = 20
 text = "back"
 
+[node name="Label2" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -85.0
+offset_right = 82.0
+offset_bottom = -40.0
+theme_override_font_sizes/font_size = 30
+text = "Select Char"
+
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
